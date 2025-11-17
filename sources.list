@@ -1,0 +1,46 @@
+################################################
+## stable
+deb http://ftp.fr.debian.org/debian/ stable main contrib non-free
+#deb-src http://ftp.fr.debian.org/debian/ stable main contrib non-free
+
+## stable multimedia
+deb http://www.deb-multimedia.org stable main non-free
+
+# stable security
+deb http://security.debian.org/ stable/updates main contrib non-free
+#deb-src http://security.debian.org/ stable/updates main contrib non-free
+
+# stable update
+deb http://ftp.fr.debian.org/debian/ stable-updates main contrib non-free
+#deb-src http://ftp.fr.debian.org/debian/ stable-updates main contrib non-free
+
+################################################
+## testing
+deb http://ftp.fr.debian.org/debian/ testing main contrib non-free
+deb-src http://ftp.fr.debian.org/debian/ testing main contrib non-free
+
+## testing multimedia
+deb http://www.deb-multimedia.org testing main non-free
+
+
+## testing security
+deb http://security.debian.org/ testing/updates main contrib non-free
+#deb-src http://security.debian.org/ testing/updates main contrib non-free
+
+################################################
+## sid
+deb http://ftp.fr.debian.org/debian/ sid main contrib non-free
+#deb-src http://ftp.fr.debian.org/debian/ sid main contrib non-free
+
+## sid multimedia
+deb http://www.deb-multimedia.org sid main non-free
+
+
+################################################
+## experimental
+deb http://ftp.fr.debian.org/debian/ experimental main contrib non-free
+#deb-src http://ftp.fr.debian.org/debian/ experimental main contrib non-free
+
+# experimental multimedia (only 64 bits, uncomment those lines if you are concerned)
+deb http://www.deb-multimedia.org experimental main
+
