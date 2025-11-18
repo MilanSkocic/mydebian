@@ -18,18 +18,17 @@ DEB13="build-essential checkinstall autotools-dev make cmake
        libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev liblzma-dev
        libgdbm-compat-dev libnsl-dev
        git lazygit
-       gcc gfortran
-       gcc-12 gfortran-12
-       gcc-13 gfortran-13
-       gcc-14 gfortran-14
+       gcc gfortran gcc-12 gfortran-12 gcc-13 gfortran-13 gcc-14 gfortran-14
+       npm golang valac
        libopenblas0 libopenblas-dev
        python3-pip python3-setuptools
-       neovim neomutt calcurse kitty tmux tree
-       stow btop htop fastfetch zoxide fzf
+       neovim neomutt calcurse kitty tmux tree pass
+       stow btop htop fastfetch zoxide fzf tree pass gpg zsh
        fonts-ubuntu fonts-ubuntu-console fonts-ubuntu-title
+       yaru-theme-gtk yaru-theme-icon
        graphviz imagemagick inkscape gimp dia geogebra texlive-full"
 
-DEB14=$DEB13
+DEB14="$DEB13 fortran-fpm"
 FLAG_LIST=0
 
 init () {
