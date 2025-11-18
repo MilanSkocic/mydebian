@@ -11,6 +11,8 @@ RED="\e[31m"
 BLACK="\e[0m"
 GREEN="\e[32m"
 
+CACHEDIR=$HOME/.cache/$PROGNAME
+
 DEB13="build-essential checkinstall autotools-dev make cmake
        libreadline-dev libncurses-dev libssl-dev libsqlite3-dev tk-dev
        libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev liblzma-dev
@@ -28,10 +30,13 @@ DEB13="build-essential checkinstall autotools-dev make cmake
        graphviz imagemagick inkscape gimp dia geogebra texlive-full"
 
 DEB14=$DEB13
-
-
 FLAG_LIST=0
 
+init () {
+    echo -n "Checking wget..."
+    if command -v wget >/dev/null 2>&1 ; then echo "done."; else echo "not found."; fi
+    return 0
+}
 
 help () {
     echo "NAME"
@@ -55,6 +60,7 @@ help () {
     echo "+debian13|13|trixie [OPTIONS]              Post installation for Debian 13 (trixie)."
     echo "+debian14|14|trixie [OPTIONS]              Post installation for Debian 14 (forky)."
     echo "+add <gcc|python> <version> <priority>     Add alternate for gcc or python."
+    echo "+dowload_python <version>                  Download python from python.org."
     echo ""
     
     echo "SUBCOMMANDS OPTIONS"
@@ -72,7 +78,6 @@ help () {
     echo "  > ./$PROGNAME.sh add gcc 15 100"
     echo "  > ./$PROGNAME.sh add pytthon 14 100"
 }
-
 
 help_usage () {
     echo "USAGE: $PROGNAME SUBCOMMAND [SUBCOMMAND_OPTIONS]"
@@ -117,6 +122,13 @@ add_python () {
     sudo update-alternatives --install /usr/bin/python3 python /usr/local/bin/python$1 $2 --slave /usr/bin/pip3 pip /usr/local/bin/pip$1
 }
 
+download_python () {
+    mkdir -p $CACHEDIR
+    wget -P $CACHEDIR https://www.python.org/ftp/python/$1/Python-$1.tgz
+}
+
+init 
+
 args=$*
 for i in $args; do
     if [[ "$i" == "--list" ]]; then
@@ -145,13 +157,19 @@ case $1 in
         case $2 in
             "gcc")
                 add_gcc $3 $4
+                exit 0
                 ;;
             "python")
                 add_python $3 $4
+                exit 0
                 ;;
             *)
                 ;;
         esac
+        ;;
+    "download_python")
+        download_python $2
+        exit 0
         ;;
     *)
         echo "Command $1 not recognized."
