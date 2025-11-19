@@ -1,13 +1,10 @@
 include make.in
 
-MD=$(MYDEBIAN_MAN_DIR)/$(MYDEBIAN_MAN_MD)
-GZ=$(MYDEBIAN_BUILD_DIR)/$(MYDEBIAN_MAN_GZ)
-HTML=$(MYDEBIAN_BUILD_DIR)/$(MYDEBIAN_MAN_HTML)
-BODY=$(MYDEBIAN_MAN_DIR)/body.md
-HEADER=$(MYDEBIAN_MAN_HEADER)
 
 SRC=$(MYDEBIAN_SRC_DIR)/$(MYDEBIAN_NAME).sh
 BIN=$(MYDEBIAN_BUILD_DIR)/$(MYDEBIAN_NAME)
+MAN=$(MYDEBIAN_MAN_DIR)/$(MYDEBIAN_MAN_NAME)
+HTML=$(MYDEBIAN_MAN_DIR)/$(MYDEBIAN_MAN_NAME).html
 
 DESTDIR=$(HOME)
 PREFIX=.local
@@ -20,11 +17,11 @@ $(BIN): $(SRC)
 	cp $< $@
 	chmod +x $@
 
-doc: 
-	$(shell cat $(HEADER) $(BODY) > $(MD))
-	pandoc --standalone --from markdown --to man $(MD) -o $(GZ)
-	pandoc --standalone --from man --to html $(GZ) -o $(HTML)
-
+doc: $(BIN) 
+	help2man --no-info --opt-include=$(MYDEBIAN_MAN_DIR)/man.in $(BIN) -o $(MAN)
+	man2html $(MAN) > $(HTML) 
+	man $(MAN)
+	
 test: $(BIN)
 	$(BIN) --version
 

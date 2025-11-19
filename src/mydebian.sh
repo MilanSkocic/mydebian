@@ -30,85 +30,62 @@ DEB13="build-essential checkinstall autotools-dev make cmake
 
 DEB14="$DEB13 fortran-fpm"
 FLAG_LIST=0
-
-init () {
-    echo -n "Checking wget..."
-    if command -v wget >/dev/null 2>&1 ; then echo "done."; else echo "not found."; fi
-    return 0
-}
+FLAG_VERBOSE=0
 
 help () {
-    echo "# NAME"
-    echo "    $PROGNAME($MANSECTION) - $SHORTDESCRIPTION"
+    echo "\`$PROGNAME\` $SHORTDESCRIPTION"
+    echo ""
+    echo "Usage: $PROGNAME SUBCOMMAND [SUBCOMMAND_OPTIONS]" 
     echo ""
 
-    echo "# SYNOPSIS"
-    echo "    $PROGNAME SUBCOMMAND [SUBCOMMAND_OPTIONS]" 
-    echo ""
-
-    echo "# DESCRIPTION"
-    echo "   $PROGNAME install a list of predefined packages."
-    echo ""
-
-    echo "# OPTIONS"
-    echo "  -v, --version        Display version."
-    echo "  -h, --help           Display help."
+    echo "Options:"
+    echo "  -v, --version   Display version."
+    echo "  -h, --help      Display help."
     echo ""
     
-    echo "# SUBCOMMANDS"
-    echo "+debian13|13|trixie [OPTIONS]              Post installation for Debian 13 (trixie)."
-    echo "+debian14|14|trixie [OPTIONS]              Post installation for Debian 14 (forky)."
-    echo "+add <gcc|python> <version> <priority>     Add alternate for gcc or python."
-    echo "+dowload_python <version>                  Download python from python.org."
+    echo "Subcommands:"
+    echo "  debian13|13|trixie [OPTIONS]            Post installation for Debian 13 (trixie)."
+    echo "  debian14|14|trixie [OPTIONS]            Post installation for Debian 14 (forky)."
+    echo "  add <gcc|python> <version> <priority>   Add alternate for gcc or python."
+    echo "  dowload_python <version>                Download python from python.org."
     echo ""
     
-    echo "# SUBCOMMANDS OPTIONS"
+    echo "Subcommand options:"
     echo "  --list                                   List packages."
     echo ""
 
-    echo "# EXAMPLES"
-    echo "Install package for debian 13."
-    echo "  > ./$PROGNAME.sh 13" 
-    echo ""
-    echo "Install and list package for debian 13."
-    echo "  > ./$PROGNAME.sh 13 --list" 
-    echo ""
-    echo "Add gcc/python alternative."
-    echo "  > ./$PROGNAME.sh add gcc 15 100"
-    echo "  > ./$PROGNAME.sh add pytthon 14 100"
-}
+    echo "Examples:"
+    echo "  $PROGNAME 13                Install package for debian 13." 
+    echo "  $PROGNAME 13 --list         Install and list package for debian 13." 
+    echo "  $PROGNAME add gcc 15 100    Add gcc alternative."
+    echo "  > ./$PROGNAME.sh add pytthon 14 100 Add Python alternative."
 
-help_usage () {
-    echo "USAGE: $PROGNAME SUBCOMMAND [SUBCOMMAND_OPTIONS]"
+    echo "Report bugs to <http://github.com/MilanSkocic/mydebian>"
+
 }
 
 version () {
-    echo "Version:      $PROGVERSION"
-    echo "Program:      $PROGNAME"
-    echo "Description:  $SHORTDESCRIPTION"
-    echo "Home Page:    $HOMEPAGE"
-    echo "License:      $LICENSE"
-    echo "OS Type:      $OSTYPE"
+    echo "$PROGNAME $PROGVERSION"
+    echo ""
+    echo "Copyright (c) 2025 Milan Skocic."
+    echo "MIT License."
+    echo ""
+    echo "Written by M. Skocic"
+
 }
 
-debian13 () {
-    echo "Post install for debian 13 trixie..."
-    if [[ $1 == 1 ]]; then
+debianpackages () {
+    echo "Post install for debian $1 trixie..."
+    if [[ $2 == 1 ]]; then
         echo $DEB13
     fi
-    sudo apt install -y $DEB13
-    echo "Done."
-    return 0
-}
-
-debian14 () {
-    echo "Post install for debian 14 forky..."
-    if [[ $1 == 1 ]]; then
-        echo $DEB14
+    if [[ $3 == 1 ]]; then
+        sudo apt install -y $1
+    else
+        sudo apt install -y $1 >/dev/null 2>&1
     fi
-    sudo apt install -y $DEB14
     echo "Done."
-    return 0
+    return $?
 }
 
 add_gcc () {
@@ -123,14 +100,26 @@ add_python () {
 
 download_python () {
     mkdir -p $CACHEDIR
-    wget -P $CACHEDIR https://www.python.org/ftp/python/$1/Python-$1.tgz
+    if [[ ! -f $CACHEDIR/Python-$1.tgz ]]; then
+        wget -P $CACHEDIR https://www.python.org/ftp/python/$1/Python-$1.tgz
+    else
+        echo "Python $1 has already been downloaded."
+    fi
 }
 
 args=$*
 for i in $args; do
-    if [[ "$i" == "--list" ]]; then
-        FLAG_LIST=1
-    fi
+    case $i in
+
+        "--list")
+            FLAG_LIST=1
+            ;;
+        "-v"|"--verbose")
+            FLAG_VERBOSE=1
+            ;;
+        *)
+            ;;
+    esac
 done
 
 case $1 in
@@ -143,11 +132,11 @@ case $1 in
         exit 0
         ;;
     "debian13"|"13"|"trixie")
-        debian13 $FLAG_LIST
+        debianpackages 13 $FLAG_LIST $FLAG_VERBOSE
         exit 0
         ;;
     "debian14"|"14"|"forky")
-        debian14 $FLAG_LIST
+        debianpackages 14 $FLAG_LIST $FLAG_VERBOSE
         exit $?
         ;;
     "add")
@@ -170,7 +159,7 @@ case $1 in
         ;;
     *)
         echo "Command $1 not recognized."
-        help_usage
+        help
         exit $?
         ;;
 esac

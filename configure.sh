@@ -6,10 +6,7 @@ export MYDEBIAN_SRC_DIR="src"
 export MYDEBIAN_BUILD_DIR="build"
 export MYDEBIAN_MAN_SEC="1"
 export MYDEBIAN_MAN_DIR="man/man$MYDEBIAN_MAN_SEC"
-export MYDEBIAN_MAN_MD=$MYDEBIAN_NAME.$MYDEBIAN_MAN_SEC.md
-export MYDEBIAN_MAN_GZ=$MYDEBIAN_NAME.$MYDEBIAN_MAN_SEC.gz
-export MYDEBIAN_MAN_HTML=$MYDEBIAN_NAME.$MYDEBIAN_MAN_SEC.html
-export MYDEBIAN_MAN_HEADER=$MYDEBIAN_MAN_DIR/header.md
+export MYDEBIAN_MAN_NAME=$MYDEBIAN_NAME.$MYDEBIAN_MAN_SEC
 
 
 envs=$(printenv | grep ^MYDEBIAN)
@@ -22,10 +19,3 @@ done
 
 mkdir -p $MYDEBIAN_BUILD_DIR
 
-echo "---"                            > $MYDEBIAN_MAN_HEADER
-echo "title: $MYDEBIAN_NAME"          >> $MYDEBIAN_MAN_HEADER
-echo "section: $MYDEBIAN_MAN_SEC"     >> $MYDEBIAN_MAN_HEADER
-echo "header: User manual"            >> $MYDEBIAN_MAN_HEADER
-echo "footer: $MYDEBIAN_NAME $MYDEBIAN_VERSION"            >> $MYDEBIAN_MAN_HEADER
-echo "date: $(date -I)"               >> $MYDEBIAN_MAN_HEADER
-echo "---"                            >> $MYDEBIAN_MAN_HEADER
