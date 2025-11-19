@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # DEFINE
-PROGNAME="postinstall"
-PROGVERSION="1.0"
+PROGNAME="mydebian"
+PROGVERSION="0.1"
 SHORTDESCRIPTION="Post install for Debian."
 HOMEPAGE=""
 LICENSE="MIT"
@@ -22,7 +22,7 @@ DEB13="build-essential checkinstall autotools-dev make cmake
        npm golang valac
        libopenblas0 libopenblas-dev
        python3-pip python3-setuptools
-       neovim neomutt calcurse kitty tmux tree pass
+       neovim neomutt calcurse kitty tmux tree pass doxygen
        stow btop htop fastfetch zoxide fzf tree pass gpg zsh
        fonts-ubuntu fonts-ubuntu-console fonts-ubuntu-title
        yaru-theme-gtk yaru-theme-icon
@@ -38,35 +38,35 @@ init () {
 }
 
 help () {
-    echo "NAME"
+    echo "# NAME"
     echo "    $PROGNAME($MANSECTION) - $SHORTDESCRIPTION"
     echo ""
 
-    echo "SYNOPSIS"
+    echo "# SYNOPSIS"
     echo "    $PROGNAME SUBCOMMAND [SUBCOMMAND_OPTIONS]" 
     echo ""
 
-    echo "DESCRIPTION"
+    echo "# DESCRIPTION"
     echo "   $PROGNAME install a list of predefined packages."
     echo ""
 
-    echo "OPTIONS"
-    echo "   -v, --version        Display version."
-    echo "   -h, --help           Display help."
+    echo "# OPTIONS"
+    echo "  -v, --version        Display version."
+    echo "  -h, --help           Display help."
     echo ""
     
-    echo "SUBCOMMANDS"
+    echo "# SUBCOMMANDS"
     echo "+debian13|13|trixie [OPTIONS]              Post installation for Debian 13 (trixie)."
     echo "+debian14|14|trixie [OPTIONS]              Post installation for Debian 14 (forky)."
     echo "+add <gcc|python> <version> <priority>     Add alternate for gcc or python."
     echo "+dowload_python <version>                  Download python from python.org."
     echo ""
     
-    echo "SUBCOMMANDS OPTIONS"
+    echo "# SUBCOMMANDS OPTIONS"
     echo "  --list                                   List packages."
     echo ""
 
-    echo "EXAMPLES"
+    echo "# EXAMPLES"
     echo "Install package for debian 13."
     echo "  > ./$PROGNAME.sh 13" 
     echo ""
@@ -125,8 +125,6 @@ download_python () {
     mkdir -p $CACHEDIR
     wget -P $CACHEDIR https://www.python.org/ftp/python/$1/Python-$1.tgz
 }
-
-init 
 
 args=$*
 for i in $args; do
