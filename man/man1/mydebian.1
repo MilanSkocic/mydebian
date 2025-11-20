@@ -4,9 +4,9 @@
 mydebian \- manual page for mydebian 0.1
 .SH SYNOPSIS
 .B mydebian
-\fI\,SUBCOMMAND \/\fR[\fI\,SUBCOMMAND_OPTIONS\/\fR]
+\fI\,COMMAND \/\fR[\fI\,SUBCOMMAND_OPTIONS\/\fR]
 .SH DESCRIPTION
-`mydebian` Post install for Debian.
+`mydebian` \fB\-\-\fR Post install for Debian.
 .SH OPTIONS
 .TP
 \fB\-v\fR, \fB\-\-version\fR
@@ -14,7 +14,7 @@ Display version.
 .TP
 \fB\-h\fR, \fB\-\-help\fR
 Display help.
-.SS "Subcommands:"
+.SH COMMANDS
 .TP
 debian13|13|trixie [OPTIONS]
 Post installation for Debian 13 (trixie).
@@ -27,7 +27,7 @@ Add alternate for gcc or python.
 .TP
 dowload_python <version>
 Download python from python.org.
-.SS "Subcommand options:"
+.SH "SUBCOMMAND OPTIONS"
 .TP
 \fB\-\-list\fR
 List packages.
@@ -41,8 +41,9 @@ Install and list package for debian 13.
 .TP
 mydebian add gcc 15 100
 Add gcc alternative.
-.IP
-\f(CW> ./mydebian.sh add pytthon 14 100 Add Python alternative.\fR
+.TP
+mydebian.sh add python 14 100
+Add Python alternative.
 .SH AUTHOR
 Written by M. Skocic
 .SH "REPORTING BUGS"
@@ -50,3 +51,6 @@ Report bugs to <http://github.com/MilanSkocic/mydebian>
 .SH COPYRIGHT
 Copyright \(co 2025 Milan Skocic.
 MIT License.
+.SH "SEE ALSO"
+.B 
+apt(8), make(1), bash(1)

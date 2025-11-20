@@ -16,11 +16,11 @@ mydebian - manual page for mydebian 0.1
 
 <B>mydebian</B>
 
-<I>,SUBCOMMAND /</I>[<I>,SUBCOMMAND_OPTIONS/</I>]
+<I>,COMMAND /</I>[<I>,SUBCOMMAND_OPTIONS/</I>]
 <A NAME="lbAD">&nbsp;</A>
 <H2>DESCRIPTION</H2>
 
-`mydebian` Post install for Debian.
+`mydebian` <B>--</B> Post install for Debian.
 <A NAME="lbAE">&nbsp;</A>
 <H2>OPTIONS</H2>
 
@@ -31,7 +31,7 @@ Display version.
 Display help.
 </DL>
 <A NAME="lbAF">&nbsp;</A>
-<H3>Subcommands:</H3>
+<H2>COMMANDS</H2>
 
 <DL COMPACT>
 <DT>debian13|13|trixie [OPTIONS]<DD>
@@ -44,7 +44,7 @@ Add alternate for gcc or python.
 Download python from python.org.
 </DL>
 <A NAME="lbAG">&nbsp;</A>
-<H3>Subcommand options:</H3>
+<H2>SUBCOMMAND OPTIONS</H2>
 
 <DL COMPACT>
 <DT><B>--list</B><DD>
@@ -60,8 +60,8 @@ Install package for debian 13.
 Install and list package for debian 13.
 <DT>mydebian add gcc 15 100<DD>
 Add gcc alternative.
-<DT><DD>
-<TT>&gt; ./mydebian.sh add pytthon 14 100 Add Python alternative.</TT>
+<DT>mydebian.sh add python 14 100<DD>
+Add Python alternative.
 </DL>
 <A NAME="lbAI">&nbsp;</A>
 <H2>AUTHOR</H2>
@@ -76,6 +76,11 @@ Report bugs to &lt;<A HREF="http://github.com/MilanSkocic/mydebian">http://githu
 
 Copyright &#169; 2025 Milan Skocic.
 MIT License.
+<A NAME="lbAL">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<B><A HREF="/cgi-bin/man/man2html?8+apt">apt</A>(8), <A HREF="/cgi-bin/man/man2html?1+make">make</A>(1), <A HREF="/cgi-bin/man/man2html?1+bash">bash</A>(1)</B>
+
 <P>
 
 <HR>
@@ -85,19 +90,18 @@ MIT License.
 <DT><A HREF="#lbAC">SYNOPSIS</A><DD>
 <DT><A HREF="#lbAD">DESCRIPTION</A><DD>
 <DT><A HREF="#lbAE">OPTIONS</A><DD>
-<DL>
-<DT><A HREF="#lbAF">Subcommands:</A><DD>
-<DT><A HREF="#lbAG">Subcommand options:</A><DD>
-</DL>
+<DT><A HREF="#lbAF">COMMANDS</A><DD>
+<DT><A HREF="#lbAG">SUBCOMMAND OPTIONS</A><DD>
 <DT><A HREF="#lbAH">EXAMPLES</A><DD>
 <DT><A HREF="#lbAI">AUTHOR</A><DD>
 <DT><A HREF="#lbAJ">REPORTING BUGS</A><DD>
 <DT><A HREF="#lbAK">COPYRIGHT</A><DD>
+<DT><A HREF="#lbAL">SEE ALSO</A><DD>
 </DL>
 <HR>
 This document was created by
 <A HREF="/cgi-bin/man/man2html">man2html</A>,
 using the manual pages.<BR>
-Time: 15:23:26 GMT, November 19, 2025
+Time: 05:53:43 GMT, November 20, 2025
 </BODY>
 </HTML>

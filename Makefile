@@ -18,12 +18,13 @@ $(BIN): $(SRC)
 	chmod +x $@
 
 doc: $(BIN) 
-	help2man --no-info --opt-include=$(MYDEBIAN_MAN_DIR)/man.in $(BIN) -o $(MAN)
+	help2man --no-info -I $(MYDEBIAN_MAN_DIR)/man.in $(BIN) -o $(MAN)
 	man2html $(MAN) > $(HTML) 
 	man $(MAN)
 	
 test: $(BIN)
 	$(BIN) --version
+	$(BIN) --help
 
 install: $(BIN)
 	cp $(BIN) $(DESTDIR)/$(PREFIX)/bin/

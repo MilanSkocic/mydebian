@@ -33,9 +33,8 @@ FLAG_LIST=0
 FLAG_VERBOSE=0
 
 help () {
-    echo "\`$PROGNAME\` $SHORTDESCRIPTION"
-    echo ""
-    echo "Usage: $PROGNAME SUBCOMMAND [SUBCOMMAND_OPTIONS]" 
+    echo "Usage: $PROGNAME COMMAND [SUBCOMMAND_OPTIONS]" 
+    echo "\`$PROGNAME\` -- $SHORTDESCRIPTION"
     echo ""
 
     echo "Options:"
@@ -43,25 +42,24 @@ help () {
     echo "  -h, --help      Display help."
     echo ""
     
-    echo "Subcommands:"
+    echo "*Commands*"
     echo "  debian13|13|trixie [OPTIONS]            Post installation for Debian 13 (trixie)."
     echo "  debian14|14|trixie [OPTIONS]            Post installation for Debian 14 (forky)."
     echo "  add <gcc|python> <version> <priority>   Add alternate for gcc or python."
     echo "  dowload_python <version>                Download python from python.org."
     echo ""
     
-    echo "Subcommand options:"
+    echo "*Subcommand options*"
     echo "  --list                                   List packages."
     echo ""
 
     echo "Examples:"
-    echo "  $PROGNAME 13                Install package for debian 13." 
-    echo "  $PROGNAME 13 --list         Install and list package for debian 13." 
-    echo "  $PROGNAME add gcc 15 100    Add gcc alternative."
-    echo "  > ./$PROGNAME.sh add pytthon 14 100 Add Python alternative."
+    echo "  $PROGNAME 13                        Install package for debian 13." 
+    echo "  $PROGNAME 13 --list                 Install and list package for debian 13." 
+    echo "  $PROGNAME add gcc 15 100            Add gcc alternative."
+    echo "  $PROGNAME.sh add python 14 100      Add Python alternative."
 
     echo "Report bugs to <http://github.com/MilanSkocic/mydebian>"
-
 }
 
 version () {
@@ -71,20 +69,39 @@ version () {
     echo "MIT License."
     echo ""
     echo "Written by M. Skocic"
-
 }
 
 debianpackages () {
-    echo "Post install for debian $1 trixie..."
+    # $1: debian version
+    # $2: flag list
+    # $3: flag verbose
+    echo "Post install for debian $1..."
+    local pkgs=""
+    case $1 in 
+        13)
+            pkgs=$DEB13
+            ;;
+        14)
+            pkgs=$DEB14
+            ;;
+        *)
+            ;;
+    esac
     if [[ $2 == 1 ]]; then
-        echo $DEB13
+        echo $pkgs
     fi
     if [[ $3 == 1 ]]; then
-        sudo apt install -y $1
+        sudo apt install -y $pkgs
     else
-        sudo apt install -y $1 >/dev/null 2>&1
+        sudo apt install -y $pkgs >/dev/null 2>&1
     fi
-    echo "Done."
+    if [[ $? != 0 ]]; then
+        echo "Error occured. Most likely, you required packages from the wrong Debian version."
+        echo "Requested Debian version: $1."
+        echo "You Debian version      : $(lsb_release -a | grep 'Release' | cut -d ":" -f 2 | sed -z 's/^[[:space:]]*//')."
+    else
+        echo "Done."
+    fi
     return $?
 }
 
@@ -133,7 +150,7 @@ case $1 in
         ;;
     "debian13"|"13"|"trixie")
         debianpackages 13 $FLAG_LIST $FLAG_VERBOSE
-        exit 0
+        exit $?
         ;;
     "debian14"|"14"|"forky")
         debianpackages 14 $FLAG_LIST $FLAG_VERBOSE
@@ -149,7 +166,10 @@ case $1 in
                 add_python $3 $4
                 exit 0
                 ;;
-            *)
+            *)  
+                echo "Missing gcc or python."
+                help
+                exit 0
                 ;;
         esac
         ;;
