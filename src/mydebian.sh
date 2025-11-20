@@ -3,7 +3,7 @@
 # DEFINE
 PROGNAME="mydebian"
 PROGVERSION="0.1"
-SHORTDESCRIPTION="Post install for Debian."
+SHORTDESCRIPTION="Simple postinstaller for Debian."
 HOMEPAGE=""
 LICENSE="MIT"
 MANSECTION="1"
