@@ -20,6 +20,9 @@ $(BIN): $(SRC)
 doc: $(BIN) 
 	help2man --no-info -I $(MYDEBIAN_MAN_DIR)/man.in $(BIN) -o $(MAN)
 	man2html $(MAN) > $(HTML) 
+
+show_man: doc
+	man $(MAN)
 	
 test: $(BIN)
 	$(BIN) --version
