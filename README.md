@@ -1,55 +1,34 @@
-# Debian Pinning
-Pinning allows you to control with precision the version of a package 
-(unstable, testing and stable) as it is more extensively explained here. 
-Pinning unstable and experimental versions is not really an issue for 
-desktop use at home but I wouldn't recommend it for workstations or servers.
+# Introduction
 
-Usually, it works fine but it happens that dependencies are broken when you 
-use Gnome or KDE as desktop environments. 
-I have encountered less problems when I use LXDE which is much more modular 
-and do not rely on a bunch of common libraries.
+`mydebian` is simple `bash` script allowing to quickly install
+a set of useful packages after a fresh installation.
 
-Here are examples of **sources.list** and preferences files. Both files are 
-located in **/etc/apt/** and the **preference** file is not created by default.
+# Dependencies
 
-# Debian sudo users
-In order to add john as sudo user enter the following command after logging 
-as root in the terminal. 
+```
+bash
+debian
+```
 
- 
-``$su - root``
+# Installation
 
-``# adduser john sudo``
+A makefile is provided for installing the script and its man page.
 
-Edit the **/etc/sudoers.d/** with the ``visudo`` command othervise it will 
-not work because **/etc/sudoers** is read-only even for root. 
+```
+make 
+make install
+```
 
-``#visudo``
+The script is installed `$DESTDIR/$PREFIX/bin/` and the man page is 
+installed in `$DESTDIR/$PREFIX/share/man/man1/`.
+By default:
+* `DESTDIR=`
+* `PREFIX=$(HOME)/.local`
 
-Change %sudo with john and save.
+You can the installation path by settings `PREFIX` as shown in the example
+below where the installation will be system-wide.
 
-# Debian mini.iso
-
-Daily build for mini.iso available here https://d-i.debian.org/daily-images/amd64/daily/netboot/mini.iso
-
-# Debian upgrade
-Apply updates to the current version.
-
-``sudo apt update ``
-
-``sudo apt upgrade``
-
-``sudo apt full-upgrade``
-
-``sudo apt --purge autoremove``
-
-Modify /etc/apt/sources.list with the adequate version.
-
-``sudo apt update ``
-
-``sudo apt upgrade``
-
-``sudo apt full-upgrade``
-
-``sudo apt --purge autoremove``
-
+```
+make
+PREFIX=usr/local make install
+```
