@@ -13,22 +13,26 @@ GREEN="\e[32m"
 
 CACHEDIR=$HOME/.cache/$PROGNAME
 
-DEB13="build-essential checkinstall autotools-dev make cmake
+PYDEV="build-essential checkinstall autotools-dev make cmake
        libreadline-dev libncurses-dev libssl-dev libsqlite3-dev tk-dev
        libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev liblzma-dev
        libgdbm-compat-dev libnsl-dev
-       git lazygit
-       gcc gfortran gcc-12 gfortran-12 gcc-13 gfortran-13 gcc-14 gfortran-14
-       npm golang valac
-       libopenblas0 libopenblas-dev
-       python3-pip python3-setuptools
-       neovim neomutt calcurse kitty tmux tree pass doxygen
+       python3-pip python3-setuptools"
+GIT="git lazygit"
+COMPILERS="gcc gfortran gcc-12 gfortran-12 gcc-13 gfortran-13 gcc-14 gfortran-14 
+           npm golang valac"
+NUMERIC="libopenblas0 libopenblas-dev libgsl-dev gsl-bin"
+YARU="yaru-theme-gtk yaru-theme-icon"
+UBUNTU="fonts-ubuntu fonts-ubuntu-console fonts-ubuntu-title"
+TEX="texlive-full"
+TOOLS="neovim neomutt calcurse kitty tmux tree pass doxygen
        stow btop htop fastfetch zoxide fzf tree pass gpg zsh
-       fonts-ubuntu fonts-ubuntu-console fonts-ubuntu-title
-       yaru-theme-gtk yaru-theme-icon
-       graphviz imagemagick inkscape gimp dia geogebra texlive-full"
+       graphviz imagemagick inkscape gimp dia geogebra
+       help2man man2html txt2man"
 
+DEB13="$PYDEV $GIT $COMPILERS $NUMERIC $YARU $UBUNTU $TOOLS"
 DEB14="$DEB13 fortran-fpm"
+
 FLAG_LIST=0
 FLAG_VERBOSE=0
 
@@ -70,7 +74,6 @@ version () {
     echo ""
     echo "Written by M. Skocic"
 }
-
 
 debianpackages () {
     # $1: debian version
@@ -179,7 +182,6 @@ case $1 in
         exit 0
         ;;
     *)
-        echo "Command $1 not recognized."
         help
         exit $?
         ;;
