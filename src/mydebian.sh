@@ -50,7 +50,7 @@ help () {
     echo ""
     
     echo "*Subcommand options*"
-    echo "  --list                                   List packages."
+    echo "  --list                                  List packages."
     echo ""
 
     echo "Examples:"
@@ -71,6 +71,7 @@ version () {
     echo "Written by M. Skocic"
 }
 
+
 debianpackages () {
     # $1: debian version
     # $2: flag list
@@ -79,16 +80,17 @@ debianpackages () {
     local pkgs=""
     case $1 in 
         13)
-            pkgs=$DEB13
+            pkgs=$(printf "%s\n" $DEB13 | sort -t " ")
             ;;
         14)
-            pkgs=$DEB14
+            pkgs=$(printf "%s\n" $DEB14 | sort -t " ")
             ;;
         *)
             ;;
     esac
-    if [[ $2 == 1 ]]; then
-        echo $pkgs
+    if [[ $2 == 1 ]]; then 
+        echo $(printf "%s\n" $pkgs | sort -t " "); 
+        return 0; 
     fi
     if [[ $3 == 1 ]]; then
         sudo apt install -y $pkgs
@@ -127,7 +129,6 @@ download_python () {
 args=$*
 for i in $args; do
     case $i in
-
         "--list")
             FLAG_LIST=1
             ;;

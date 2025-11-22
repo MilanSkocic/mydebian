@@ -21,6 +21,11 @@ doc: $(BIN)
 	help2man --no-info -I $(MYDEBIAN_MAN_DIR)/man.in $(BIN) -o $(MAN)
 	man2html $(MAN) > $(HTML) 
 
+docs: doc
+	rm -rf docs/*
+	cp -rfv $(MAN) docs/
+	cp -rfv $(HTML) docs/
+
 show_man: doc
 	man $(MAN)
 	
