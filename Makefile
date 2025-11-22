@@ -22,7 +22,8 @@ doc: $(BIN)
 	man2html $(MAN) > $(HTML) 
 
 docs: doc
-	rm -rf docs/*
+	rm -fv docs/$(MAN)
+	rm -fv docs/$(HTML)
 	cp -rfv $(MAN) docs/
 	cp -rfv $(HTML) docs/
 
