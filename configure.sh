@@ -19,3 +19,6 @@ done
 
 mkdir -p $MYDEBIAN_BUILD_DIR
 
+IFS=$'\n'
+sed -E -i "s/(0|[1-9]\d*)\.(0|[1-9]\d*)\.?(0|[1-9]\d*)?/$MYDEBIAN_VERSION/g" "$MYDEBIAN_SRC_DIR/$MYDEBIAN_NAME.sh"
+
