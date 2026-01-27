@@ -1,0 +1,29 @@
+NAME                                                                 
+  mydebian - post installer for Debian.                             
+                                                                     
+SYNOPSIS                                                             
+  mydebian COMMAND [OPTIONS]                                        
+                                                                     
+DESCRIPTION                                                          
+  Simple post installer for Debian.                                  
+                                                                     
+    o debian13|13|trixie [OPTIONS]             Post installation for Debian 13 (trixie).
+    o debian14|14|trixie [OPTIONS]             Post installation for Debian 14 (forky).
+    o add <gcc|python> <version> <priority>    Add alternate for gcc or python.
+    o dowload_python <version>                 Download python from python.org.
+                                                                     
+OPTIONS                                                              
+  o --list          List packages.           
+  o -v, --version   Display version.                                 
+  o -h, --help      Display help.                                    
+                                                                     
+EXAMPLE                                                              
+  Minimal example                                                    
+                                                                     
+    mydebian 13                                                   
+    mydebian 13 --list                                            
+    mydebian add gcc 15 100                                       
+    mydebian.sh add python 14 100                                 
+
+SEE ALSO
+  apt(8)
