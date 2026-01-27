@@ -37,42 +37,44 @@ FLAG_LIST=0
 FLAG_VERBOSE=0
 
 help () {
-    echo "Usage: $PROGNAME COMMAND [SUBCOMMAND_OPTIONS]" 
-    echo "\`$PROGNAME\` -- $SHORTDESCRIPTION"
+    echo "NAME                                                                 "
+    echo "  $PROGNAME - post installer for Debian.                             "
+    echo "                                                                     "
+    echo "SYNOPSIS                                                             "
+    echo "  $PROGNAME COMMAND [OPTIONS]                                        " 
+    echo "                                                                     "
+    echo "DESCRIPTION                                                          "
+    echo "  Simple post installer for Debian.                                  " 
+    echo "                                                                     "
+    echo "    o debian13|13|trixie [OPTIONS]             Post installation for Debian 13 (trixie)."
+    echo "    o debian14|14|trixie [OPTIONS]             Post installation for Debian 14 (forky)."
+    echo "    o add <gcc|python> <version> <priority>    Add alternate for gcc or python."
+    echo "    o dowload_python <version>                 Download python from python.org."
+    echo "                                                                     "
+    echo "OPTIONS                                                              "
+    echo "  o --list          List packages.           "
+    echo "  o -v, --version   Display version.                                 "
+    echo "  o -h, --help      Display help.                                    "
+    echo "                                                                     "
+    echo "EXAMPLE                                                              "
+    echo "  Minimal example                                                    "
+    echo "                                                                     "
+    echo "    $PROGNAME 13                                                   " 
+    echo "    $PROGNAME 13 --list                                            " 
+    echo "    $PROGNAME add gcc 15 100                                       "
+    echo "    $PROGNAME.sh add python 14 100                                 "
     echo ""
-
-    echo "Options:"
-    echo "  -v, --version   Display version."
-    echo "  -h, --help      Display help."
-    echo ""
-    
-    echo "*Commands*"
-    echo "  debian13|13|trixie [OPTIONS]            Post installation for Debian 13 (trixie)."
-    echo "  debian14|14|trixie [OPTIONS]            Post installation for Debian 14 (forky)."
-    echo "  add <gcc|python> <version> <priority>   Add alternate for gcc or python."
-    echo "  dowload_python <version>                Download python from python.org."
-    echo ""
-    
-    echo "*Subcommand options*"
-    echo "  --list                                  List packages."
-    echo ""
-
-    echo "Examples:"
-    echo "  $PROGNAME 13                        Install package for debian 13." 
-    echo "  $PROGNAME 13 --list                 Install and list package for debian 13." 
-    echo "  $PROGNAME add gcc 15 100            Add gcc alternative."
-    echo "  $PROGNAME.sh add python 14 100      Add Python alternative."
-
-    echo "Report bugs to <http://github.com/MilanSkocic/mydebian>"
+    echo "SEE ALSO"
+    echo "  apt(8)"
 }
 
+
 version () {
-    echo "$PROGNAME $PROGVERSION"
-    echo ""
-    echo "Copyright (c) 2025 Milan Skocic."
-    echo "MIT License."
-    echo ""
-    echo "Written by M. Skocic"
+    echo "PROGRAM:      $PROGNAME                          "
+    echo "DESCRIPTION:  $SHORTDESCRIPTION                  "
+    echo "VERSION:      $PROGVERSION                       "
+    echo "AUTHOR:       M. Skocic                          "
+    echo "LICENSE:      $LICENSE                           "
 }
 
 debianpackages () {
@@ -101,7 +103,7 @@ debianpackages () {
         sudo apt install -y $pkgs >/dev/null 2>&1
     fi
     if [[ $? != 0 ]]; then
-        echo "Error occured. Most likely, you required packages from the wrong Debian version."
+        echo "Error occurred. Most likely, you required packages from the wrong Debian version."
         echo "Requested Debian version: $1."
         echo "You Debian version      : $(lsb_release -a | grep 'Release' | cut -d ":" -f 2 | sed -z 's/^[[:space:]]*//')."
     else
