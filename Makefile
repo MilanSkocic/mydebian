@@ -5,6 +5,7 @@ SRC=$(MYDEBIAN_SRC_DIR)/$(MYDEBIAN_NAME).sh
 BIN=$(MYDEBIAN_BUILD_DIR)/$(MYDEBIAN_NAME)
 MAN=$(MYDEBIAN_MAN_DIR)/$(MYDEBIAN_MAN_NAME)
 HTML=$(MYDEBIAN_MAN_DIR)/$(MYDEBIAN_MAN_NAME).html
+PDF=$(MYDEBIAN_MAN_DIR)/$(MYDEBIAN_MAN_NAME).pdf
 
 DESTDIR=
 PREFIX=$(HOME)/.local
@@ -18,8 +19,10 @@ $(BIN): $(SRC)
 	chmod +x $@
 
 doc: $(BIN) 
-	help2man --no-info -I $(MYDEBIAN_MAN_DIR)/man.in $(BIN) -o $(MAN)
-	man2html $(MAN) > $(HTML) 
+	$(BIN) --help > $(MAN).txt
+	txt2man -s 1 -t $(MYDEBIAN_NAME) -v "User commands" -r $(MYDEBIAN_VERSION) $(MAN).txt > $(MAN)
+	man -Thtml -l $(MAN) > $(HTML) 
+	man -Tpdf -l $(MAN) > $(PDF) 
 
 docs: doc
 	rm -fv docs/$(MAN)
