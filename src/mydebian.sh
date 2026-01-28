@@ -40,19 +40,20 @@ help () {
     echo "NAME"
     echo "  $PROGNAME - post installer for Debian."
     echo ""
-    echo "SYNOPSIS                                                             "
+    echo "SYNOPSIS"
     echo "  $PROGNAME COMMAND [OPTIONS]" 
     echo ""
     echo "DESCRIPTION"
-    echo "  Simple post installer for Debian." 
+    echo "  Simple post installer for Debian. The commands are defined as:" 
+    echo "    o 13                                       Post installation for Debian 13 (trixie)."
+    echo "    o 14                                       Post installation for Debian 14 (forky)."
+    echo "    o add <gcc|python> <version> <priority>    Add alternate for gcc or python."
+    echo "    o dowload_python <version>                 Download python from python.org."
     echo ""
     echo "OPTIONS"
-    echo "  o debian13|13|trixie [OPTIONS]             Post installation for Debian 13 (trixie)."
-    echo "  o debian14|14|trixie [OPTIONS]             Post installation for Debian 14 (forky)."
-    echo "  o add <gcc|python> <version> <priority>    Add alternate for gcc or python."
-    echo "  o dowload_python <version>                 Download python from python.org."
     echo "  o --list          List packages."
     echo "  o --version, -v   Display version."
+    echo "  o --verbose, -V   Increase verbosity."
     echo "  o --help, -h      Display help."
     echo ""
     echo "EXAMPLE"
@@ -61,7 +62,7 @@ help () {
     echo "     $PROGNAME 13" 
     echo "     $PROGNAME 13 --list" 
     echo "     $PROGNAME add gcc 15 100"
-    echo "     $PROGNAME.sh add python 14 100"
+    echo "     $PROGNAME add python 3.14 100"
     echo ""
     echo "SEE ALSO"
     echo "  apt(8)"
@@ -136,7 +137,7 @@ for i in $args; do
         "--list")
             FLAG_LIST=1
             ;;
-        "-v"|"--verbose")
+        "-V"|"--verbose")
             FLAG_VERBOSE=1
             ;;
         *)
@@ -153,11 +154,11 @@ case $1 in
         version
         exit 0
         ;;
-    "debian13"|"13"|"trixie")
+    "13")
         debianpackages 13 $FLAG_LIST $FLAG_VERBOSE
         exit $?
         ;;
-    "debian14"|"14"|"forky")
+    "14")
         debianpackages 14 $FLAG_LIST $FLAG_VERBOSE
         exit $?
         ;;
