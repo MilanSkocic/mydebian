@@ -1,5 +1,5 @@
 <!-- Creator     : groff version 1.23.0 -->
-<!-- CreationDate: Tue Jan 27 23:34:24 2026 -->
+<!-- CreationDate: Wed Jan 28 06:28:10 2026 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -43,8 +43,8 @@
 </h2>
 
 
-<p style="margin-left:9%; margin-top: 1em">mydebian COMMAND
-[OPTIONS]</p>
+<p style="margin-left:9%; margin-top: 1em"><b>mydebian</b>
+<i>COMMAND</i> [<i>OPTIONS</i>]</p>
 
 <h2>DESCRIPTION
 <a name="DESCRIPTION"></a>
@@ -52,7 +52,49 @@
 
 
 <p style="margin-left:9%; margin-top: 1em">Simple post
-installer for Debian.</p>
+installer for Debian. The commands are defined as:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>o 13</b></p></td>
+<td width="4%"></td>
+<td width="52%">
+
+
+<p>Post installation for Debian 13 (trixie).</p></td>
+<td width="21%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>o 14</b></p></td>
+<td width="4%"></td>
+<td width="52%">
+
+
+<p>Post installation for Debian 14 (forky).</p></td>
+<td width="21%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>o add &lt;gcc|python&gt;
+&lt;version&gt; &lt;priority&gt;</b></p>
+
+<p style="margin-left:27%;">Add alternate for gcc or
+python.</p>
+
+<p style="margin-left:18%;"><b>o dowload_python
+&lt;version&gt;</b></p>
+
+<p style="margin-left:27%;">Download python from
+python.org.</p>
 
 <h2>OPTIONS
 <a name="OPTIONS"></a>
@@ -60,36 +102,17 @@ installer for Debian.</p>
 
 
 <p style="margin-left:9%; margin-top: 1em"><b>o
-debian13|13|trixie [OPTIONS]</b></p>
-
-<p style="margin-left:18%;">Post installation for Debian 13
-(trixie).</p>
-
-<p style="margin-left:9%;"><b>o debian14|14|trixie
-[OPTIONS]</b></p>
-
-<p style="margin-left:18%;">Post installation for Debian 14
-(forky).</p>
-
-<p style="margin-left:9%;"><b>o add &lt;gcc|python&gt;
-&lt;version&gt; &lt;priority&gt;</b></p>
-
-<p style="margin-left:18%;">Add alternate for gcc or
-python.</p>
-
-<p style="margin-left:9%;"><b>o dowload_python
-&lt;version&gt;</b></p>
-
-<p style="margin-left:18%;">Download python from
-python.org.</p>
-
-<p style="margin-left:9%;"><b>o --list</b></p>
+--list</b></p>
 
 <p style="margin-left:18%;">List packages.</p>
 
 <p style="margin-left:9%;"><b>o --version, -v</b></p>
 
 <p style="margin-left:18%;">Display version.</p>
+
+<p style="margin-left:9%;"><b>o --verbose, -V</b></p>
+
+<p style="margin-left:18%;">Increase verbosity.</p>
 
 <p style="margin-left:9%;"><b>o --help, -h</b></p>
 
@@ -106,7 +129,7 @@ example</p>
 <p style="margin-left:9%; margin-top: 1em">mydebian 13 <br>
 mydebian 13 --list <br>
 mydebian add gcc 15 100 <br>
-mydebian.sh add python 14 100</p>
+mydebian add python 3.14 100</p>
 
 <h2>SEE ALSO
 <a name="SEE ALSO"></a>
