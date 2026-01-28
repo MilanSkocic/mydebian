@@ -2,7 +2,7 @@
 
 # DEFINE
 PROGNAME="mydebian"
-PROGVERSION="0.1"
+PROGVERSION="0.2"
 SHORTDESCRIPTION="Simple postinstaller for Debian."
 HOMEPAGE=""
 LICENSE="MIT"
@@ -62,7 +62,7 @@ help () {
     echo "     $PROGNAME 13" 
     echo "     $PROGNAME 13 --list" 
     echo "     $PROGNAME add gcc 15 100"
-    echo "     $PROGNAME add python 3.14 100"
+    echo "     $PROGNAME add python 0.2 100"
     echo ""
     echo "SEE ALSO"
     echo "  apt(8)"
