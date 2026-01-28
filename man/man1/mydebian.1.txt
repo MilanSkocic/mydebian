@@ -23,7 +23,7 @@ EXAMPLE
      mydebian 13
      mydebian 13 --list
      mydebian add gcc 15 100
-     mydebian add python 3.14 100
+     mydebian add python 0.2 100
 
 SEE ALSO
   apt(8)
