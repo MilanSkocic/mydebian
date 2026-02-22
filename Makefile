@@ -7,7 +7,6 @@ MAN=$(MYDEBIAN_MAN_DIR)/$(MYDEBIAN_MAN_NAME)
 HTML=$(MYDEBIAN_MAN_DIR)/$(MYDEBIAN_MAN_NAME).html
 PDF=$(MYDEBIAN_MAN_DIR)/$(MYDEBIAN_MAN_NAME).pdf
 
-DESTDIR=
 PREFIX=$(HOME)/.local
 
 .PHONY: clean doc
@@ -38,12 +37,12 @@ test: $(BIN)
 	$(BIN) --help
 
 install: $(BIN)
-	cp $(BIN) $(DESTDIR)/$(PREFIX)/bin/
-	cp $(MAN) $(DESTDIR)/$(PREFIX)/share/man/man$(MYDEBIAN_MAN_SEC)/
+	cp $(BIN) $(PREFIX)/bin/
+	cp $(MAN) $(PREFIX)/share/man/man$(MYDEBIAN_MAN_SEC)/
 
 uninstall: $(BIN)
-	rm $(DESTDIR)/$(PREFIX)/bin/$(MYDEBIAN_NAME)
-	rm $(DESTDIR)/$(PREFIX)/share/man/man$(MYDEBIAN_MAN_SEC)/$(MYDEBIAN_NAME)*
+	rm $(PREFIX)/bin/$(MYDEBIAN_NAME)
+	rm $(PREFIX)/share/man/man$(MYDEBIAN_MAN_SEC)/$(MYDEBIAN_NAME)*
 
 clean:
 	rm -rf $(MYDEBIAN_BUILD_DIR)/*

@@ -19,13 +19,11 @@ make
 make install
 ```
 
-The script is installed `$DESTDIR/$PREFIX/bin/` and the man page is 
-installed in `$DESTDIR/$PREFIX/share/man/man1/`.
-By default:
-* `DESTDIR=`
-* `PREFIX=$(HOME)/.local`
+The script is installed `$PREFIX/bin/` and the man page is 
+installed in `$PREFIX/share/man/man1/`.
+By default `PREFIX=$(HOME)/.local`
 
-You can the installation path by settings `PREFIX` as shown in the example
+You can change the installation path by settings `PREFIX` as shown in the example
 below where the installation will be system-wide.
 
 ```
