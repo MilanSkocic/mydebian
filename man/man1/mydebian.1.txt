@@ -6,16 +6,16 @@ SYNOPSIS
 
 DESCRIPTION
   Simple post installer for Debian. The commands are defined as:
-    o 13                                       Post installation for Debian 13 (trixie).
-    o 14                                       Post installation for Debian 14 (forky).
-    o add <gcc|python> <version> <priority>    Add alternate for gcc or python.
-    o dowload_python <version>                 Download python from python.org.
+    + 13                                       Post installation for Debian 13 (trixie).
+    + 14                                       Post installation for Debian 14 (forky).
+    + add <gcc|python> <version> <priority>    Add alternate for gcc or python.
+    + dowload_python <version>                 Download python from python.org.
 
 OPTIONS
-  o --list          List packages.
-  o --version, -v   Display version.
-  o --verbose, -V   Increase verbosity.
-  o --help, -h      Display help.
+  --list          List packages.
+  --version, -v   Display version.
+  --verbose, -V   Increase verbosity.
+  --help, -h      Display help.
 
 EXAMPLE
   Minimal example
